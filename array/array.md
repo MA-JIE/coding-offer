@@ -173,18 +173,11 @@ public:
     {
         int left = 0;
         int right = nums.size();
-        int mid = 0;
-        //定义target是否存在与数组内的bool函数
-        bool find = false;
-        //存储最后时刻的mid值
-        int mid_value = 0;
         while (left < right)
         {
-            mid = (left + right) / 2;
-            mid_value = mid;
+            int mid = (left + right) / 2;
             if (nums[mid] == target)
             {
-                find = true;
                 return mid;
             }
             if (nums[mid] < target)
@@ -193,16 +186,11 @@ public:
             }
             if (nums[mid] > target)
             {
+            //这里需要注意一下，若right = nums.size() -1, 则right = mid - 1
                 right = mid;
             }
         }
-        if (!find)
-        {
-            //如果最终的值大于target,应该插在左边，反之，插在右边
-            return (nums[mid_value] > target) ? mid_value : (mid_value + 1);
-        }
-        return -1;
+        return left;
     }
 };
-
 ```
