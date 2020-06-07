@@ -138,3 +138,23 @@ public:
 注意这五个元素可为任意顺序。<br>
 
 你不需要考虑数组中超出新长度后面的元素。<br>
+思路:这道题也是引用了双指针的思路,定义一个快指针,一个慢指针.同样也可以直接调用vector中的对应函数进行操作.<br>
+``` cpp
+class Solution
+{
+public:
+    int removeElement(vector<int> &nums, int val)
+    {
+        int i = 0;
+        for (int j = 0; j < nums.size(); j++)
+        {
+            if (nums[j] != val)
+            {
+                nums[i] = nums[j];
+                i++;
+            }
+        }
+        return i;
+    }
+};
+```
