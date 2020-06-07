@@ -43,5 +43,80 @@ public:
   [-1, -1, 2]         <br>
 ]                     <br>
 ``` cpp
+class Solution
+{
+public:
+    vector<vector<int>> threeSum(vector<int> &nums)
+    {
 
+        std::vector<std::vector<int>> result;
+        //判定条件
+        if (nums.size() < 3)
+        {
+            return result;
+        }
+        //排序
+        sort(nums.begin(), nums.end());
+        //取地址
+        int *unmoved_ptr = &nums[0];
+        int *end_ptr = &nums[nums.size() - 1];
+        int value = nums[0];
+        while (unmoved_ptr <= (end_ptr - 2))
+        {
+            //如果固定值大于0,退出循环,没有继续的必要了
+            if (*unmoved_ptr > 0)
+            {
+                break;
+            }
+            int *left = unmoved_ptr + 1;
+            int *right = end_ptr;
+            while (right > left)
+            {
+                int sum = *unmoved_ptr + *left + *right;
+                if (sum > 0)
+                {
+                    right--;
+                    //跳过重复值
+                    while (*right == *(right + 1) && right > left)
+                    {
+                        right--;
+                    }
+                }
+                if (sum < 0)
+                {
+                    left++;
+                    //跳过重复值
+                    while (*left == *(left - 1) && right > left)
+                    {
+                        left++;
+                    }
+                }
+                if (sum == 0)
+                {
+                    std::vector<int> tmp = {*unmoved_ptr, *left, *right};
+                    result.emplace_back(tmp);
+                    left++;
+                    right--;
+                    //跳过重复值
+                    while (*right == *(right + 1) && right > left)
+                    {
+                        right--;
+                    }
+                    while (*left == *(left - 1) && right > left)
+                    {
+                        left++;
+                    }
+                }
+            }
+            value = *unmoved_ptr;
+            unmoved_ptr++;
+            //跳过重复值
+            while (*unmoved_ptr == value && unmoved_ptr <= (end_ptr - 2))
+            {
+                unmoved_ptr++;
+            }
+        }
+        return result;
+    }
+};
 ```
