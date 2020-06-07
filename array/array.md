@@ -186,8 +186,37 @@ public:
             }
             if (nums[mid] > target)
             {
-            //这里需要注意一下，若right = nums.size() -1, 则right = mid - 1
+            //这里需要注意一下，若right = nums.size() -1, 则right = mid - 1,而且while的判定条件改为left <= right
                 right = mid;
+            }
+        }
+        return left;
+    }
+};
+```
+模板二：<br>
+``` cpp
+class Solution
+{
+public:
+    int searchInsert(vector<int> &nums, int target)
+    {
+        int left = 0;
+        int right = nums.size() - 1;
+        while (left <= right)
+        {
+            int mid = (left + right) / 2;
+            if (nums[mid] == target)
+            {
+                return mid;
+            }
+            if (nums[mid] < target)
+            {
+                left = mid + 1;
+            }
+            if (nums[mid] > target)
+            {
+                right = mid - 1;
             }
         }
         return left;
