@@ -158,3 +158,51 @@ public:
     }
 };
 ```
+# 4.搜索插入位置
+给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。<br>
+你可以假设数组中无重复元素。<br>
+示例:<br>
+输入: [1,3,5,6], 5 <br>
+输出: 2
+
+``` cpp
+class Solution
+{
+public:
+    int searchInsert(vector<int> &nums, int target)
+    {
+        int left = 0;
+        int right = nums.size();
+        int mid = 0;
+        //定义target是否存在与数组内的bool函数
+        bool find = false;
+        //存储最后时刻的mid值
+        int mid_value = 0;
+        while (left < right)
+        {
+            mid = (left + right) / 2;
+            mid_value = mid;
+            if (nums[mid] == target)
+            {
+                find = true;
+                return mid;
+            }
+            if (nums[mid] < target)
+            {
+                left = mid + 1;
+            }
+            if (nums[mid] > target)
+            {
+                right = mid;
+            }
+        }
+        if (!find)
+        {
+            //如果最终的值大于target,应该插在左边，反之，插在右边
+            return (nums[mid_value] > target) ? mid_value : (mid_value + 1);
+        }
+        return -1;
+    }
+};
+
+```
