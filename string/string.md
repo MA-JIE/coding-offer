@@ -16,6 +16,7 @@ public:
     string longestPalindrome(string s)
     {
         int n = s.size();
+        //声明一个二维数组
         vector<vector<int>> dp(n, vector<int>(n));
         string ans;
         for (int l = 0; l < n; l++)
