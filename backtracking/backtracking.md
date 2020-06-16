@@ -46,3 +46,65 @@ public:
     }
 };
 ```
+# 2.组合总和
+给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>
+candidates 中的数字可以无限制重复被选取。<br>
+说明：<br>
+所有数字（包括 target）都是正整数。<br>
+解集不能包含重复的组合。<br>
+示例：<br>
+输入: candidates = [2,3,6,7], target = 7,
+所求解集为:<br>
+[ <br>
+  [7], <br>
+  [2,2,3] <br>
+] <br>
+输入: candidates = [2,3,5], target = 8,
+所求解集为:<br>
+[ <br>
+  [2,2,2,2],<br>
+  [2,3,3],<br>
+  [3,5] <br>
+]<br>
+
+```cpp
+class Solution
+{
+private:
+    vector<int> candidates;
+    //输出结果
+    vector<vector<int>> res;
+    //当前路径
+    vector<int> path;
+    //start代表index
+    void DFS(int start, int target)
+    {
+        //递归基，如果为0，说明该条路径满足条件，加入result中，并返回
+        if (target == 0)
+        {
+            res.emplace_back(path);
+            return;
+        }
+        //从start开始，避免了重复出现的数组,判定条件中若target小于对应元素，返回
+        for (int i = start; i < candidates.size() && target - candidates[i] >= 0; i++)
+        {
+            //现将元素加入path
+            path.emplace_back(candidates[i]);
+            //递归实现
+            DFS(i, target - candidates[i]);
+            //将元素弹出，进入下次迭代
+            path.pop_back();
+        }
+    }
+
+public:
+    vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+    {
+        //先进行排序操作为了提高搜索速度
+        std::sort(candidates.begin(), candidates.end());
+        this->candidates = candidates;
+        DFS(0, target);
+        return res;
+    }
+};
+```
