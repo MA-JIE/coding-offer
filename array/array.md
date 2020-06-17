@@ -223,16 +223,56 @@ public:
     }
 };
 ```
-# 5.缺失的第一个正数
-给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。<br>
+# 5.最接近的三数之和
+给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。<br>
 示例：<br>
-输入: [1,2,0] <br>
-输出: 3 <br>
-示例： <br>
-输入: [7,8,9,11,12] <br>
-输出: 1 <br>
-提示：<br>
-你的算法的时间复杂度应为O(n)，并且只能使用常数级别的额外空间。<br>
+输入：nums = [-1,2,1,-4], target = 1 <br>
+输出：2 <br>
+解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2)<br>
+思路：双指针的思路，双边同时移动，不断更新最小差值并保存对应的临时sum
 ``` cpp
-
+class Solution
+{
+public:
+    int threeSumClosest(vector<int> &nums, int target)
+    {
+        if (nums.size() == 3)
+        {
+            return nums[0] + nums[1] + nums[2];
+        }
+        std::sort(nums.begin(), nums.end());
+        //用于保存返回的值
+        int res = 0;
+        int minvalue = __INT32_MAX__;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            int left = i + 1;
+            int right = nums.size() - 1;
+            while (left < right)
+            {
+                //记录临时的和
+                int tmp_sum = nums[i] + nums[left] + nums[right];
+                //不断更新最小值并保存对应的临时和
+                if (std::fabs(tmp_sum - target) <= minvalue)
+                {
+                    minvalue = std::fabs(tmp_sum - target);
+                    res = tmp_sum;
+                }
+                if (tmp_sum < target)
+                {
+                    left++;
+                }
+                else if (tmp_sum > target)
+                {
+                    right--;
+                }
+                else
+                {
+                    return tmp_sum;
+                }
+            }
+        }
+        return res;
+    }
+};
 ```
