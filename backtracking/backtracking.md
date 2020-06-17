@@ -108,3 +108,56 @@ public:
     }
 };
 ```
+# 3.组合总和 II
+给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>
+candidates 中的每个数字在每个组合中只能使用一次。<br>
+说明：<br>
+所有数字（包括目标数）都是正整数。<br>
+解集不能包含重复的组合。 <br>
+示例：<br>
+输入: candidates = [10,1,2,7,6,1,5], target = 8,
+所求解集为:<br>
+[<br>
+  [1, 7],<br>
+  [1, 2, 5],<br>
+  [2, 6],<br>
+  [1, 1, 6]<br>
+]<br>
+思路：该题和上一题的思路差不多，不过需要注意的是每次迭代一遍后，都要判断此时的值是否与相邻值相同，若相同，则舍去，不然会造成重复数组的出现。<br>
+```cpp
+class Solution
+{
+private:
+    vector<int> candidates;
+    vector<vector<int>> res;
+    vector<int> path;
+    void DFS(int start, int target)
+    {
+        if (target == 0)
+        {
+            res.emplace_back(path);
+            return;
+        }
+        for (int i = start; i < candidates.size() && target - candidates[i] >= 0; ++i)
+        {
+            //i > start代表着进入下一次迭代
+            if (i > start && candidates[i] == candidates[i - 1])
+            {
+                continue;
+            }
+            path.emplace_back(candidates[i]);
+            DFS(i + 1, target - candidates[i]);
+            path.pop_back();
+        }
+    }
+
+public:
+    vector<vector<int>> combinationSum2(vector<int> &candidates, int target)
+    {
+        std::sort(candidates.begin(), candidates.end());
+        this->candidates = candidates;
+        DFS(0, target);
+        return res;
+    }
+};
+```
