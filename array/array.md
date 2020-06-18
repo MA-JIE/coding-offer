@@ -276,3 +276,9 @@ public:
     }
 };
 ```
+# 6.在排序数组中查找元素的第一个和最后一个位置
+参考链接：https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/solution/er-fen-cha-zhao-suan-fa-xi-jie-xiang-jie-by-labula/<br>
+其中详细介绍了二分查找这一类的问题
+```cpp
+
+```
