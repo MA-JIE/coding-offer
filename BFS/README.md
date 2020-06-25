@@ -8,3 +8,4 @@ size()：返回 queue 中元素的个数。<br>
 empty()：如果 queue 中没有元素的话，返回 true。<br>
 emplace()：用传给 emplace() 的参数调用 T 的构造函数，在 queue 的尾部生成对象。<br>
 swap(queue<T> &other_q)：将当前 queue 中的元素和参数 queue 中的元素交换。它们需要包含相同类型的元素。也可以调用全局函数模板 swap() 来完成同样的操作。<br>
+![queue](https://github.com/MA-JIE/coding-offer/blob/master/BFS/img/queue.png)
