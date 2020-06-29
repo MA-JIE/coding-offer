@@ -108,6 +108,8 @@ malloc的时候得确定在那里free.<br>
 5、可以通过类名访问（无对象生成时亦可），也可以通过对象访问. <br>
 
 # 16. struct与class的区别
+struct作为数据结构的实现体，它默认的数据访问控制是public的，而class作为对象的实现体，它默认的成员变量访问控制是private的. <br>
+struct是一种数据结构的实现体，虽然它是可以像class一样的用.依旧将struct里的变量叫数据，class内的变量叫成员，虽然它们并无区别. <br>
 在C++中struct得到了很大的扩充: <br>
 1.struct可以包括成员函数 <br>
 2.struct可以实现继承 <br>
@@ -115,6 +117,5 @@ malloc的时候得确定在那里free.<br>
 从语法上，在C++中class和struct做类型定义时只有两点区别: <br>
 1. 默认继承权限。如果不明确指定，来自class的继承按照private继承处理，来自struct的继承按照public继承处理. <br>
 2. 成员的默认访问权限. class的成员默认是private权限，struct默认是public权限. <br>
-struct作为数据结构的实现体，它默认的数据访问控制是public的，而class作为对象的实现体，它默认的成员变量访问控制是private的. <br>
-我依旧强调struct是一种数据结构的实现体，虽然它是可以像class一样的用.依旧将struct里的变量叫数据，class内的变量叫成员，虽然它们并无区别. <br>
+
 
