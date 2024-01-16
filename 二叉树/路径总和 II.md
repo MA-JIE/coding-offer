@@ -18,9 +18,10 @@ public:
         bool is_leaf_node = root->left == nullptr && root->right == nullptr;
         if(is_leaf_node && targetSum - root->val == 0 ){
           record->push_back(*single_path);
-        }
+        } else {
         isPath(root->left, targetSum - root->val, single_path,record);
         isPath(root->right, targetSum - root->val, single_path,record);
+        }
         single_path->pop_back();
     }
 };
