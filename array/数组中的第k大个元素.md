@@ -61,4 +61,37 @@ public:
     }
 };
 
+//最大元素第二种写法
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int left = 0;
+        int right = nums.size() - 1;
+        while (true) {
+            int pos = partition(nums, left, right);
+            if (pos == k - 1) {
+                return nums[pos];
+            }
+            if (pos > k - 1) {
+                right = pos - 1;
+            } else {
+                left = pos + 1;
+            }
+        }
+    }
+
+    int partition(std::vector<int>& nums, int left, int right) {
+        int pivot = nums[right];
+        int i = left;
+        for (int j = left; j < right; j++) {
+            if (nums[j] >= pivot) {
+                std::swap(nums[i], nums[j]);
+                i++;
+            }
+        }
+        std::swap(nums[i], nums[right]);
+        return i;
+    }
+};
+
 ```
